@@ -1,0 +1,57 @@
+{% extends 'reporting/master.html' %}
+
+{%- block head_custom %}
+<!-- links for CSV Download -->
+<script type="text/javascript" src="{{ url_for('static', filename='csv_table_downloader.js') }}"></script>
+<!-- links for Pivot table -->
+<link href="https://cdn.webdatarocks.com/latest/webdatarocks.min.css" rel="stylesheet"/>
+<script src="https://cdn.webdatarocks.com/latest/webdatarocks.toolbar.min.js"></script>
+<script src="https://cdn.webdatarocks.com/latest/webdatarocks.js"></script>
+{%- endblock %}
+
+{% block content %}
+<!-- Data table -->
+<h1>Data Table</h1>
+{{ table | safe }}
+
+<!-- CSV Download Button -->
+<button class="btn btn-primary" id="export">Download as CSV</button>
+<!-- CSV Download Script (leverages library above) -->
+<script>
+const table = document.getElementById('exportMe');
+const exportBtn = document.getElementById('export');
+
+exportBtn.addEventListener('click', function () {
+    // Export to csv
+    const csv = toCsv(table);
+
+    // Download it
+    download(csv, 'test_list_tables.csv');
+});
+</script>
+
+<!-- Pivot table -->
+<!-- https://www.webdatarocks.com/doc/json-data-source/ -->
+<h1>Pivot Table</h1>
+<p>Using code from <a href="https://www.webdatarocks.com/">webdatarocks.com</a>.</p>
+
+<div id="wdr-component"></div>
+
+<script>
+var myJSONData = {{ json_data | safe }};
+
+var pivot = new WebDataRocks({
+    container: "#wdr-component",
+    toolbar: true,
+    report: {
+        dataSource: {
+        	data: myJSONData
+        }
+    }
+});
+</script>
+
+{%- endblock %}
+
+{%- block scripts %}
+{%- endblock %}

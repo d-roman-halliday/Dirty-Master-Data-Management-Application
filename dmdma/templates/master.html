@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Head -->
+        {%- block head %}
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        {%- block head_custom %}
+        {%- endblock %}
+
+        <!-- Styles -->
+        {%- block styles %}
+            <!-- Bootstrap CSS -->
+            {{ bootstrap.load_css() }}
+            <!-- make me pretty with: https://bootswatch.com/ -->
+            <!-- https://pythonhosted.org/Flask-Bootstrap/basic-usage.html -->
+        {%- endblock %}
+        <!-- End: Styles -->
+
+        <title>dmdma&nbsp;:&nbsp;
+        {%- block title -%}
+        &copy; David Roman-Halliday
+        {%- endblock -%}
+        </title>
+
+        {%- endblock %}
+        <!-- End: Head -->
+    </head>
+    <body>
+<!-- Application Selection NavBar -->
+        {%- block application_selection %}
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <!-- Site Name/Brand -->
+        	<a class="navbar-brand" href="/">dmdma</a>
+
+            <!-- Button for if page is too narrow for all items -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarApplicationSelection" aria-controls="navbarApplicationSelection" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Button controlled items -->
+            <div class="collapse navbar-collapse" id="navbarApplicationSelection">
+	        	<!-- List of Applications -->
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('auth.login') }}">Authentication</a></li>
+        {% if g.user %}
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('reporting.home') }}">Reporting</a></li>
+        {% endif %}
+	    <!-- Application Selection Items -->
+        {%- block application_selection_items -%}
+        {%- endblock %}
+        <!-- End: Application Selection Items -->
+                </ul>
+        	</div>
+        </nav>
+{%- endblock %}
+<!-- End: Application Selection NavBar -->
+
+<!-- Application NavBar -->
+{%- block application_navbar %}
+{%- endblock %}
+<!-- End: Application NavBar -->
+
+        <main>
+            <div class="container mb-3">
+<!-- Content -->
+{%- block content %}
+{%- endblock %}
+<!-- End: Content -->
+            </div>
+        </main>
+
+        <footer>
+            <div class="pt-3 bg-dark text-light">
+<!-- Page Footer -->
+        {%- block page_footer %}
+            <div class="row">
+                <div class="col ml-3">
+            {% if g.user %}
+                    <p>Logged in as: {{ g.user['username'] }}</p>
+            {% endif %}
+                </div>
+                <div class="col mr-3 text-right">
+                    <p>&copy; David Roman-Halliday</p>
+                </div>
+            </div>
+       {%- endblock %}
+<!-- End: Page Footer -->
+            </div>
+        </footer>
+
+
+        <!-- Scripts -->
+        {%- block scripts %}
+        <!-- Optional JavaScript -->
+        {{ bootstrap.load_js() }}
+        {%- endblock %}
+        <!-- End: Scripts -->
+    </body>
+</html>

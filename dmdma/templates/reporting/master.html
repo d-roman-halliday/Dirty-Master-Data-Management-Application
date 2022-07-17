@@ -1,0 +1,26 @@
+{% extends 'master.html' %}
+
+{%- block application_navbar %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <!-- Application Name -->
+    <a class="navbar-brand" href="{{ url_for('reporting.home') }}">Reporting</a>
+
+    <!-- Button for if page is too narrow for all items -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarApplication" aria-controls="navbarApplication" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Button controlled items -->
+    <div class="collapse navbar-collapse" id="navbarApplication">
+        <!-- List of Applications -->
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item"><a class="nav-link" href="{{ url_for('reporting.pivot_sample') }}">PivotTable</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ url_for('reporting.reset_db') }}">Reset Database</a></li>
+        </ul>
+    </div>
+</nav>
+{%- endblock %}
+
+{% block content %}
+<p>reporting content goes here</p>
+{% endblock %}
