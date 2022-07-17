@@ -1,0 +1,51 @@
+{% extends 'master.html' %}
+
+{% block content %}
+<h1>Welcome to dmdma</h1>
+<p>Dirty Master Data Management Application</p>
+<p>The aim of this project it to be an example/template/starting point for using
+<a href="https://palletsprojects.com/p/flask/">flask</a> for a quick and dirty
+approach to a <b>Master Data Management</b> Application AKA a <b>Data Warehouse Management Application</b>.
+</p>
+{% if g.user %}
+<p>Select a sub application from the selection above</p>
+{% else %}
+<p>Login to access applications</p>
+{% endif %}
+<h1>To Do</h1>
+<h1>Short Term</h1>
+<ul>
+    <li>Complete tutorial at <a href="https://flask.palletsprojects.com/en/2.1.x/tutorial/">Flask</a></li>
+    <li>Document (in README.md):
+        <ul>
+            <li>PivotTable integration</li>
+            <li>layout</li>
+            <li>Libraries used</li>
+        </ul>
+    </li>
+    <li>Refactor applications</li>
+    <li>Apply to python code <a href="https://realpython.com/documenting-python-code/">Documenting Python Code</a> practises.</li>
+    <li>Do more <a href="https://testdriven.io/blog/flask-pytest/">Testing Flask Applications with Pytest</a> tests.</li>
+    <li>Application: Reporting
+        <ul>
+            <li>Try out: <a href="https://www.chartjs.org/">chartjs.org</a></li>
+            <li>Try out: <a href="https://apexcharts.com/">apexcharts.com</a></li>
+        </ul>
+    </li>
+    <li>Application: Linking/mapping
+        <ul>
+            <li>report for problems</li>
+            <li>CSV uploads</li>
+            <li>ID Updating page</li>
+        </ul>
+    </li>
+</ul>
+<h1>Longer Term</h1>
+<ul>
+    <li>Convert Auth to dynamic pages (use bootstrap better)</li>
+    <li>User Management</li>
+    <li>Authentication - Google auth</li>
+    <li>Dynamic applications list (using both user information/permissions and available applications)</li>
+    <li>Databases (incorporate other connections/libraries for more integration.interaction)</li>
+</ul>
+{% endblock %}

@@ -1,0 +1,5 @@
+include dmdma/data
+graft dmdma/static
+graft dmdma/templates
+global-exclude *.pyc
+global-exclude *.DS_Store

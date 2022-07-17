@@ -1,0 +1,29 @@
+{% extends 'auth/master.html' %}
+
+{% block auth_header %}
+  <h1>{% block title %}Log In{% endblock %}</h1>
+{% endblock %}
+
+{% block auth_content %}
+{% if g.user %}
+<p>User already logged in</p>
+{% else %}
+<div class="row align-items-start">
+  <div class="col-4">
+  <form method="post">
+    <div class="mb-3">
+        <label for="username" class="form-label">Username</label>
+        <input name="username" class="form-control" id="username" required>
+    </div>
+    <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" class="form-control" name="password" id="password" aria-describedby="passwordlHelp" required>
+    </div>
+    <div class="mb-3">
+	    <input type="submit" value="Log In" class="btn btn-primary">
+    </div>
+  </form>
+  </div>
+</div>
+{% endif %}
+{% endblock %}
