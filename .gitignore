@@ -1,0 +1,24 @@
+# Virtual environments
+venv/
+
+# Instance
+instance/
+
+# Testing Output
+htmlcov/
+
+# Compiled and working directories
+*.egg
+*.egg-info/
+*.pyc
+*.pyo
+*.coverage
+
+build/
+
+# OS and Application files not needed
+.DS_Store
+.vscode
+.project
+.pydevproject
+/.pytest_cache/
