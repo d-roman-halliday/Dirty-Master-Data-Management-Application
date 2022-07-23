@@ -86,9 +86,12 @@ def load_logged_in_user():
             'SELECT * FROM user WHERE id = ?', (user_id,)
         ).fetchone()
 
+def logout_actions():
+    session.clear()
+
 @bp.route('/logout')
 def logout():
-    session.clear()
+    logout_actions()
     return redirect(url_for('homepage'))
 
 @bp.route('/reset_db')
@@ -101,7 +104,8 @@ def reset_db():
     # This shouldn't be used in production
     init_db()
 
-    logout()
+    logout_actions()
+    return redirect(url_for('auth.login'))
 
 def login_required(view):
     @functools.wraps(view)

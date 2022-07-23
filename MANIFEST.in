@@ -1,4 +1,4 @@
-include dmdma/data
+graft dmdma/data
 graft dmdma/static
 graft dmdma/templates
 global-exclude *.pyc

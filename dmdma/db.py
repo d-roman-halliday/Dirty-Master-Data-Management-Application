@@ -1,6 +1,4 @@
 '''
-Created on 13 Jul 2022
-
 @author: davidroman-halliday
 '''
 

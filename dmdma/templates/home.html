@@ -7,22 +7,31 @@
 <a href="https://palletsprojects.com/p/flask/">flask</a> for a quick and dirty
 approach to a <b>Master Data Management</b> Application AKA a <b>Data Warehouse Management Application</b>.
 </p>
+<p>Code for this project can be seen on github: <a href="https://github.com/d-roman-halliday/Dirty-Master-Data-Management-Application">d-roman-halliday -> Dirty-Master-Data-Management-Application</a></p>
 {% if g.user %}
 <p>Select a sub application from the selection above</p>
 {% else %}
-<p>Login to access applications</p>
+<p>Login (via the Authentication link above) to access applications</p>
 {% endif %}
 <h1>To Do</h1>
-<h1>Short Term</h1>
+<h2>Short Term</h2>
 <ul>
-    <li>Complete tutorial at <a href="https://flask.palletsprojects.com/en/2.1.x/tutorial/">Flask</a></li>
     <li>Document (in README.md):
         <ul>
+            <li>Deployment
+                <ul>
+                    <li>Apache WSGI Configuration</li>
+                    <li>Python virtual environments for prod</li>
+                    <li>Build & deploy process</li>
+                </ul>
+            </li>
             <li>PivotTable integration</li>
             <li>layout</li>
             <li>Libraries used</li>
         </ul>
     </li>
+    <li>Create <a href="https://hackersandslackers.com/configure-flask-applications/">configuration</a> files, with <a href="https://stackoverflow.com/questions/26979579/django-mod-wsgi-set-os-environment-variable-from-apaches-setenv">env</a> variables</li>
+    <li>Relocate sqlite files in prod outside of python code (into configurable location)</li>
     <li>Refactor applications</li>
     <li>Apply to python code <a href="https://realpython.com/documenting-python-code/">Documenting Python Code</a> practises.</li>
     <li>Do more <a href="https://testdriven.io/blog/flask-pytest/">Testing Flask Applications with Pytest</a> tests.</li>
@@ -40,7 +49,7 @@ approach to a <b>Master Data Management</b> Application AKA a <b>Data Warehouse 
         </ul>
     </li>
 </ul>
-<h1>Longer Term</h1>
+<h2>Longer Term</h2>
 <ul>
     <li>Convert Auth to dynamic pages (use bootstrap better)</li>
     <li>User Management</li>
