@@ -1,12 +1,15 @@
 {% extends 'reporting/master.html' %}
 
 {% block content %}
-<p>Database reset</p>
+<h1>Database reset</h1>
+
+<p>The database has been reset</p>
+
 {{ table | safe }}
 
 <button class="btn btn-primary" id="export">Download as CSV</button>
 
-<!-- Export CSV -->
+<!-- Export CSV Code (all embedded rather than linked)-->
 <script>
 const toCsv = function (table) {
     // Query all rows
@@ -52,5 +55,5 @@ exportBtn.addEventListener('click', function () {
     download(csv, 'test_list_tables.csv');
 });
 </script>
-
+<!-- End: Export CSV Code -->
 {% endblock %}

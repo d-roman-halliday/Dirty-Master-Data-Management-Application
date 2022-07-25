@@ -1,0 +1,51 @@
+{% extends 'reporting/master.html' %}
+
+{%- block head_custom %}
+<!-- links for CSV Download -->
+<script type="text/javascript" src="{{ url_for('static', filename='reporting/csv_table_downloader.js') }}"></script>
+{%- endblock %}
+
+{% block content %}
+<h1>Reporting: {% block title %}{{ report_page_title }}{% endblock %}</h1>
+<!-- Reporting Items -->
+{% for reportItem in reporting_table_sets %}
+<!-- Reporting Item -->
+<h2>{{ reportItem.title }}</h2>
+
+{% if ( ( reportItem.introTextIsHTML == false ) and ( reportItem.introText is not none ) ) %}
+<p>{{ reportItem.introText }}</p>
+{% elif ( reportItem.introText is not none ) %}
+{{ reportItem.introText | safe }}
+{% endif %}
+
+{{ reportItem.htmlTable | safe }}
+
+{% if reportItem.htmlTableCsvDownload == true %}
+<!-- CSV Download Button -->
+<button class="btn btn-primary" id="btn_{{ reportItem.htmlTableID }}">Download as CSV</button>
+<!-- CSV Download Button Code -->
+<script>
+const table_{{loop.index}} = document.getElementById('{{ reportItem.htmlTableID }}');
+const exportBtn_{{loop.index}} = document.getElementById('btn_{{ reportItem.htmlTableID }}');
+
+exportBtn_{{loop.index}}.addEventListener('click', function () {
+    // Export to csv
+    const csv = toCsv(table_{{loop.index}});
+
+    // Download it
+    download(csv, '{{ reportItem.title | replace(" ", "_") }}.csv');
+});
+</script>
+{% endif %}
+
+{% if ( ( reportItem.outroTextIsHTML == false ) and ( reportItem.outroText is not none ) ) %}
+<p>{{ reportItem.outroText }}</p>
+{% elif ( reportItem.outroText is not none ) %}
+{{ reportItem.outroText | safe }}
+{% endif %}
+
+<!-- End: Reporting Item -->
+{% endfor %}
+<!-- End: Reporting Items -->
+
+{%- endblock %}

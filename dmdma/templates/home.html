@@ -22,7 +22,7 @@ approach to a <b>Master Data Management</b> Application AKA a <b>Data Warehouse 
                 <ul>
                     <li>Apache WSGI Configuration</li>
                     <li>Python virtual environments for prod</li>
-                    <li>Build & deploy process</li>
+                    <li>Build &amp; deploy process</li>
                 </ul>
             </li>
             <li>PivotTable integration</li>
@@ -30,9 +30,8 @@ approach to a <b>Master Data Management</b> Application AKA a <b>Data Warehouse 
             <li>Libraries used</li>
         </ul>
     </li>
-    <li>Create <a href="https://hackersandslackers.com/configure-flask-applications/">configuration</a> files, with <a href="https://stackoverflow.com/questions/26979579/django-mod-wsgi-set-os-environment-variable-from-apaches-setenv">env</a> variables</li>
-    <li>Relocate sqlite files in prod outside of python code (into configurable location)</li>
     <li>Refactor applications</li>
+    <li>Create <a href="https://hackersandslackers.com/configure-flask-applications/">configuration</a> files, with <a href="https://stackoverflow.com/questions/26979579/django-mod-wsgi-set-os-environment-variable-from-apaches-setenv">env</a> variables</li>
     <li>Apply to python code <a href="https://realpython.com/documenting-python-code/">Documenting Python Code</a> practises.</li>
     <li>Do more <a href="https://testdriven.io/blog/flask-pytest/">Testing Flask Applications with Pytest</a> tests.</li>
     <li>Application: Reporting
@@ -41,20 +40,35 @@ approach to a <b>Master Data Management</b> Application AKA a <b>Data Warehouse 
             <li>Try out: <a href="https://apexcharts.com/">apexcharts.com</a></li>
         </ul>
     </li>
-    <li>Application: Linking/mapping
+    <li>Application: Linking &amp; Mapping
         <ul>
             <li>report for problems</li>
             <li>CSV uploads</li>
             <li>ID Updating page</li>
         </ul>
     </li>
+    <li>Application: System &amp; Information
+        <ul>
+            <li>Execute shell script/command (return output)</li>
+            <li>Link/download file(s) from location</li>
+        </ul>
+    </li>
 </ul>
+
 <h2>Longer Term</h2>
 <ul>
+    <li>Relocate sqlite files in prod outside of python code (into configurable location)</li>
     <li>Convert Auth to dynamic pages (use bootstrap better)</li>
+    <li>Alternative mod_wsgi deployment (compile)</li>
     <li>User Management</li>
     <li>Authentication - Google auth</li>
     <li>Dynamic applications list (using both user information/permissions and available applications)</li>
     <li>Databases (incorporate other connections/libraries for more integration.interaction)</li>
+    <li>Application: Secure chart creation
+        <ul>
+            <li>Create charts/graphs which can be embedded in an iframe of another application with filter arguments as URL parameters</li>
+            <li>Create/enable secure connections/trust so that the only the host application can create charts (other calls result in error)</li>
+        </ul>
+    </li>
 </ul>
 {% endblock %}
