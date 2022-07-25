@@ -1,9 +1,7 @@
 import functools
 import os
 
-from flask import (
-    Blueprint, flash, g, redirect, render_template, request, session, url_for
-)
+from flask import Blueprint, flash, g, redirect, render_template, request, session, url_for
 from flask import current_app
 from flask.cli import with_appcontext
 
@@ -103,6 +101,90 @@ def pivot_sample():
         db.close
 
     return render_template('reporting/pivot.html', table=beautiful_html_table, json_data=pandas_resultset_json)
+
+@with_appcontext
+@bp.route('/dynamic_sample_1')
+def dynamic_sample_1():
+    # Redirect to login if no user logged in
+    # ToDo: Add logic to see if user has access to application
+    if g.user is None:
+        return redirect(url_for('auth.login'))
+
+    TEST_DATABASE = os.path.join(current_app.instance_path, TEST_DATABASE_NAME)
+
+    db = sqlite3.connect(
+            TEST_DATABASE,
+            detect_types=sqlite3.PARSE_DECLTYPES
+        )
+
+    from dmdma.reporting import item
+
+    get_data_sql = "SELECT * FROM testing;"
+
+    report_part_1 = item.reportItem(title='Testing report 1')
+    report_part_1.htmlTableID = 'rep_1'
+    report_part_1.introText = '<p>This goes before the table</p>'
+    report_part_1.introTextIsHTML = True
+    report_part_1.outroText = 'This goes after the table'
+    report_part_1.dataFrame = pandas.read_sql_query(get_data_sql, db)
+    report_part_1.htmlTable = beautify_html_table(report_part_1.dataFrame.to_html(index = False),
+                                                  table_id = report_part_1.htmlTableID
+                                                  )
+
+
+    get_data_sql = "SELECT * FROM testing_2;"
+
+    report_part_2 = item.reportItem(title='Testing report 2',
+                                    dataFrame = pandas.read_sql_query(get_data_sql, db),
+                                    )
+    report_part_2.htmlTable = beautify_html_table(report_part_2.dataFrame.to_html(index = False),
+                                                  table_id = report_part_2.htmlTableID
+                                                  )
+
+
+    report_page_title = 'Testing Reports'
+    reporting_table_sets = [report_part_1,
+                            report_part_2
+                           ]
+
+    return render_template('reporting/reporting_items.html',
+                           report_page_title = report_page_title,
+                           reporting_table_sets = reporting_table_sets
+                           )
+
+@with_appcontext
+@bp.route('/dynamic_sample_2')
+def dynamic_sample_2():
+    # Redirect to login if no user logged in
+    # ToDo: Add logic to see if user has access to application
+    if g.user is None:
+        return redirect(url_for('auth.login'))
+
+    TEST_DATABASE = os.path.join(current_app.instance_path, TEST_DATABASE_NAME)
+
+    db = sqlite3.connect(
+            TEST_DATABASE,
+            detect_types=sqlite3.PARSE_DECLTYPES
+        )
+
+    from dmdma.reporting import item
+
+    get_data_sql = "SELECT value_2, SUM(metric_1) AS metric_1_sum FROM testing GROUP BY value_2;"
+
+    report_part_1 = item.reportItem(title='Aggregate Report',
+                                    dataFrame = pandas.read_sql_query(get_data_sql, db),
+                                    )
+    report_part_1.convertToBeautifulHTML()
+
+
+    report_page_title = 'Testing Reports 2'
+    reporting_table_sets = [report_part_1
+                           ]
+
+    return render_template('reporting/reporting_items.html',
+                           report_page_title = report_page_title,
+                           reporting_table_sets = reporting_table_sets
+                           )
 
 if __name__ == '__main__':
     pass

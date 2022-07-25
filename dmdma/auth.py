@@ -5,14 +5,9 @@ Created on 13 Jul 2022
 '''
 
 import functools
-
-from flask import (
-    Blueprint, flash, g, redirect, render_template, request, session, url_for
-)
+from flask import Blueprint, flash, g, redirect, render_template, request, session, url_for
 from werkzeug.security import check_password_hash, generate_password_hash
-
 from markupsafe import escape
-
 from dmdma.db import get_db
 
 #Not good for prod, but handy for testing
@@ -20,6 +15,18 @@ from dmdma.db import init_db
 
 bp = Blueprint('auth', __name__, url_prefix='/auth')
 
+def logout_actions():
+    session.clear()
+
+def login_required(view):
+    @functools.wraps(view)
+    def wrapped_view(**kwargs):
+        if g.user is None:
+            return redirect(url_for('auth.login'))
+
+        return view(**kwargs)
+
+    return wrapped_view
 
 @bp.route('/register', methods=('GET', 'POST'))
 def register():
@@ -86,9 +93,6 @@ def load_logged_in_user():
             'SELECT * FROM user WHERE id = ?', (user_id,)
         ).fetchone()
 
-def logout_actions():
-    session.clear()
-
 @bp.route('/logout')
 def logout():
     logout_actions()
@@ -101,21 +105,11 @@ def reset_db():
     if g.user is None:
         return redirect(url_for('auth.login'))
 
-    # This shouldn't be used in production
+    # This shouldn't be used in a production application
     init_db()
 
     logout_actions()
     return redirect(url_for('auth.login'))
-
-def login_required(view):
-    @functools.wraps(view)
-    def wrapped_view(**kwargs):
-        if g.user is None:
-            return redirect(url_for('auth.login'))
-
-        return view(**kwargs)
-
-    return wrapped_view
 
 if __name__ == '__main__':
     pass
