@@ -121,7 +121,7 @@ def dynamic_sample_1():
 
     get_data_sql = "SELECT * FROM testing;"
 
-    report_part_1 = item.item(title='Testing report 1')
+    report_part_1 = item.reportItem(title='Testing report 1')
     report_part_1.htmlTableID = 'rep_1'
     report_part_1.introText = '<p>This goes before the table</p>'
     report_part_1.introTextIsHTML = True
@@ -134,7 +134,7 @@ def dynamic_sample_1():
 
     get_data_sql = "SELECT * FROM testing_2;"
 
-    report_part_2 = item.item(title='Testing report 2',
+    report_part_2 = item.reportItem(title='Testing report 2',
                                     dataFrame = pandas.read_sql_query(get_data_sql, db),
                                     )
     report_part_2.htmlTable = beautify_html_table(report_part_2.dataFrame.to_html(index = False),
@@ -171,7 +171,7 @@ def dynamic_sample_2():
 
     get_data_sql = "SELECT value_2, SUM(metric_1) AS metric_1_sum FROM testing GROUP BY value_2;"
 
-    report_part_1 = item.item(title='Aggregate Report',
+    report_part_1 = item.reportItem(title='Aggregate Report',
                                     dataFrame = pandas.read_sql_query(get_data_sql, db),
                                     )
     report_part_1.convertToBeautifulHTML()
