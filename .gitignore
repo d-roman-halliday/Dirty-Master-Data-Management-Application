@@ -25,3 +25,4 @@ build/
 .project
 .pydevproject
 /.pytest_cache/
+*.settings
