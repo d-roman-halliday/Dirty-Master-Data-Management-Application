@@ -16,9 +16,6 @@ htmlcov/
 
 build/
 
-# Distribution files
-*.whl
-
 # OS and Application files not needed
 .DS_Store
 .vscode

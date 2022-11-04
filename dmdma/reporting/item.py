@@ -5,7 +5,7 @@ import uuid
 
 from dmdma.reporting import beautify_html_table
 
-class item:
+class reportItem:
     """A common reporting set of attributes to iterate over for multiple data sets to be returned in a page"""
     def __init__(self,
                 title,
