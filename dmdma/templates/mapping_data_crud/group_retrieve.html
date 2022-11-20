@@ -1,0 +1,23 @@
+{% extends 'mapping_data_crud/group.html' %}
+
+{% block sub_content %}
+
+{%- if individual_group %}
+<!-- Retrieve Individual Item -->
+
+<h2>Group Information</h2>
+<dl>
+    <dt>ID</dt>
+    <dd><a href='{{ url_for('mapping_data_crud.group_retrieve', group_id=individual_group.id) }}'>{{ individual_group.id }}</a></dd>
+    <dt>reference</dt>
+    <dd>{{ individual_group.reference }}</dd>
+    <dt>description</dt>
+    <dd>{{ individual_group.description }}</dd>
+    <dt>date_created</dt>
+    <dd>{{ individual_group.date_created }}</dd>
+</dl>
+
+<!-- End: Retrieve Individual Item -->
+{% endif %}
+
+{%- endblock %}

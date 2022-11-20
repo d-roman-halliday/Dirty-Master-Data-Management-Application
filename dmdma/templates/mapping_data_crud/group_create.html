@@ -1,0 +1,26 @@
+{% extends 'mapping_data_crud/group.html' %}
+
+{% block sub_content %}
+<!-- Create New Group -->
+
+<h2>Create Group</h2>
+<div class="row align-items-start">
+  <div class="col-4">
+  <form method="post">
+    <div class="mb-3">
+        <label for="reference" class="form-label">reference</label>
+        <input name="group_reference" class="form-control" id="reference" required>
+    </div>
+    <div class="mb-3">
+        <label for="description" class="form-label">description</label>
+        <input name="group_description" class="form-control" id="description" required>
+    </div>
+    <div class="mb-3">
+        <input type="submit" value="Create" class="btn btn-primary">
+    </div>
+  </form>
+  </div>
+</div>
+
+<!-- End: Create New Group -->
+{%- endblock %}

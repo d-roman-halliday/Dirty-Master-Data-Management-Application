@@ -1,0 +1,15 @@
+{% extends 'iframes/master.html' %}
+
+{% block content %}
+<p>Welcome to the iFrames page</p>
+<!-- iFrame Item -->
+{% if ifreame_item %}
+<p>{{ ifreame_item.name }}: {{ ifreame_item.description }}</p>
+<iframe src="{{ ifreame_item.url }}"
+      title="{{ ifreame_item.name }}"
+      width=100%
+      style="height: 75vh"
+      ></iframe>
+{% endif %}
+<!-- End: iFrame Item -->
+{% endblock %}

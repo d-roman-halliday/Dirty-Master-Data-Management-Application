@@ -1,0 +1,34 @@
+{% extends 'mapping_data_crud/mapping.html' %}
+
+{% block sub_content %}
+<!-- Create New mapping -->
+
+<h2>Create mapping</h2>
+<div class="row align-items-start">
+  <div class="col-4">
+  <form method="post">
+    <div class="mb-3">
+        <label for="entity_id" class="form-label">entity_id</label>
+        <select name="mapping_entity_id" class="form-control" id="entity_id" required>
+        {% for entity in entities %}
+            <option value="{{ entity.id }}">{{ entity.reference }}</option>
+        {% endfor %}
+        </select>
+    </div>
+    <div class="mb-3">
+        <label for="group_id" class="form-label">group_id</label>
+        <select name="mapping_group_id" class="form-control" id="group_id" required>
+        {% for group in groups %}
+            <option value="{{ group.id }}">{{ group.reference }}</option>
+        {% endfor %}
+        </select>
+    </div>
+    <div class="mb-3">
+        <input type="submit" value="Create" class="btn btn-primary">
+    </div>
+  </form>
+  </div>
+</div>
+
+<!-- End: Create New mapping -->
+{%- endblock %}

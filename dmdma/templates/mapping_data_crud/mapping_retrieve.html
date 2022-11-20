@@ -1,0 +1,23 @@
+{% extends 'mapping_data_crud/mapping.html' %}
+
+{% block sub_content %}
+
+{%- if individual_mapping %}
+<!-- Retrieve Individual Item -->
+
+<h2>mapping Information</h2>
+<dl>
+    <dt>ID</dt>
+    <dd><a href='{{ url_for('mapping_data_crud.mapping_retrieve', mapping_id=individual_mapping.id) }}'>{{ individual_mapping.id }}</a></dd>
+    <dt>entity_id</dt>
+    <dd>{{ individual_mapping.entity_id }}</dd>
+    <dt>group_id</dt>
+    <dd>{{ individual_mapping.group_id }}</dd>
+    <dt>date_created</dt>
+    <dd>{{ individual_mapping.date_created }}</dd>
+</dl>
+
+<!-- End: Retrieve Individual Item -->
+{% endif %}
+
+{%- endblock %}

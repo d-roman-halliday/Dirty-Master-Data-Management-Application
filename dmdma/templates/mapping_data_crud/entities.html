@@ -1,0 +1,182 @@
+{% extends 'mapping_data_crud/master.html' %}
+
+{%- block head_custom %}
+<!-- links for CSV Download -->
+<script type="text/javascript" src="{{ url_for('static', filename='csv_table_downloader.js') }}"></script>
+{%- endblock %}
+
+{% block content %}
+<h1>Entities</h1>
+
+{%- if error_message %}
+<!-- Error Message -->
+
+<h2>Error</h2>
+<p>{{ error_message }}</p>
+
+<!-- End: Error Message -->
+{% endif %}
+
+
+{%- if create_entity %}
+<!-- Create New Entity -->
+
+<h2>Create Entity</h2>
+<div class="row align-items-start">
+  <div class="col-4">
+  <form method="post">
+    <div class="mb-3">
+        <label for="reference" class="form-label">reference</label>
+        <input name="entity_reference" class="form-control" id="reference" required>
+    </div>
+    <div class="mb-3">
+        <label for="description" class="form-label">description</label>
+        <input name="entity_description" class="form-control" id="description" required>
+    </div>
+    <div class="mb-3">
+        <input type="submit" value="Create" class="btn btn-primary">
+    </div>
+  </form>
+  </div>
+</div>
+
+<!-- End: Create New Entity -->
+{% endif %}
+
+{%- if individual_entity and retrieve_entity %}
+<!-- Retrieve Individual Item -->
+
+<h2>Entity Information</h2>
+<dl>
+    <dt>ID</dt>
+    <dd><a href='{{ url_for('mapping_data_crud.entity') }}/{{ individual_entity.id }}'>{{ individual_entity.id }}</a></dd>
+    <dt>reference</dt>
+    <dd>{{ individual_entity.reference }}</dd>
+    <dt>description</dt>
+    <dd>{{ individual_entity.description }}</dd>
+    <dt>date_created</dt>
+    <dd>{{ individual_entity.date_created }}</dd>
+</dl>
+
+<!-- End: Retrieve Individual Item -->
+{% endif %}
+
+
+{%- if individual_entity and update_entity %}
+<!-- Update Individual Item -->
+
+<h2>Update Entity</h2>
+<div class="row align-items-start">
+  <div class="col-4">
+  <form method="post">
+    <div class="mb-3">
+        <label for="id" class="form-label">ID</label>
+        <input name="entity_id" class="form-control" id="id" value="{{ individual_entity.id }}" required disabled>
+    </div>
+    <div class="mb-3">
+        <label for="reference" class="form-label">reference</label>
+        <input name="entity_reference" class="form-control" id="reference" value="{{ individual_entity.reference }}" required>
+    </div>
+    <div class="mb-3">
+        <label for="description" class="form-label">description</label>
+        <input name="entity_description" class="form-control" id="description" value="{{ individual_entity.description }}" required>
+    </div>
+    <div class="mb-3">
+        <label for="date_created" class="form-label">date_created</label>
+        <input name="entity_date_created" class="form-control" id="date_created" value="{{ individual_entity.date_created }}" required disabled>
+    </div>
+    <div class="mb-3">
+        <input type="submit" value="Update" class="btn btn-primary">
+    </div>
+  </form>
+  </div>
+</div>
+
+<!-- End: Update Individual Item -->
+{% endif %}
+
+{%- if individual_entity and delete_entity %}
+<!-- Delete Individual Item -->
+
+<h2>Delete Entity</h2>
+<p>Click YES to confirm Deletion</p>
+<form action='' method="post" class='pb-2'>
+    <input type="hidden" name="entity_delete_verification" id="verification" value="true" >
+    <input type = "submit" value="YES" class="btn btn-warning">
+</form>
+
+<form action="{{ url_for('mapping_data_crud.entity', entity_id=individual_entity.id, entity_action='retrieve') }}" class='pb-2'>
+<button class="btn btn-primary">Cancel</button>
+</form>
+
+<!-- End: Delete Individual Item -->
+{% endif %}
+
+{%- if entities %}
+<!-- Output Items -->
+
+<h2>Entity List</h2>
+<table id='entity_list' class='table table-striped table-hover table-sm'>
+<tr class='thead-dark text-center'>
+    <th>ID</th>
+    <th>Reference</th>
+    <th>Description</th>
+    <th>Date Created</th>
+<tr>
+{% for entity in entities %}
+<tr>
+    <td><a href='{{ url_for('mapping_data_crud.entity') }}/{{ entity.id }}'>{{ entity.id }}</a></td>
+    <td>{{ entity.reference }}</td>
+    <td>{{ entity.description }}</td>
+    <td>{{ entity.date_created }}</td>
+</tr>
+{% endfor %}
+</table>
+<!-- CSV Download Button -->
+<button class="btn btn-primary" id="entity_list_btn_download_csv">Download as CSV</button>
+<!-- End: CSV Download Button -->
+<!-- CSV Download Button Code -->
+<script>
+const table_entity_list = document.getElementById('entity_list');
+const exportBtn_entity_list = document.getElementById('entity_list_btn_download_csv');
+
+exportBtn_entity_list.addEventListener('click', function () {
+    // Export to csv
+    const csv = toCsv(table_entity_list);
+
+    // Download it
+    download(csv, 'entities_list_export.csv');
+});
+</script>
+<!-- End: CSV Download Button Code -->
+
+<!-- End: Output Items -->
+{% endif %}
+
+{%- if not delete_entity %}
+<h2>Entity Actions</h2>
+
+{%- if show_create_btn %}
+<form action="{{ url_for('mapping_data_crud.entity_create') }}" class='pb-2'>
+<button class="btn btn-primary">Create New Entity</button>
+</form>
+{% endif %}
+
+{%- if individual_entity %}
+<form action="{{ url_for('mapping_data_crud.entity', entity_id=individual_entity.id, entity_action='retrieve') }}" class='pb-2'>
+<button class="btn btn-primary">Retrieve (view) This Entity</button>
+</form>
+<form action="{{ url_for('mapping_data_crud.entity', entity_id=individual_entity.id, entity_action='update') }}" class='pb-2'>
+<button class="btn btn-primary">Update This Entity</button>
+</form>
+<form action="{{ url_for('mapping_data_crud.entity', entity_id=individual_entity.id, entity_action='delete') }}" class='pb-2'>
+<button class="btn btn-primary">Delete This Entity</button>
+</form>
+<form action="{{ url_for('mapping_data_crud.entity') }}" class='pb-2'>
+<button class="btn btn-primary">View All Entities</button>
+</form>
+{% endif %}
+
+{% endif %}
+
+{%- endblock %}

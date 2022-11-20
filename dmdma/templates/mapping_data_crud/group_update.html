@@ -1,0 +1,36 @@
+{% extends 'mapping_data_crud/group.html' %}
+
+{% block sub_content %}
+{%- if individual_group %}
+<!-- Update Individual Item -->
+
+<h2>Update Group</h2>
+<div class="row align-items-start">
+  <div class="col-4">
+  <form method="post">
+    <div class="mb-3">
+        <label for="id" class="form-label">ID</label>
+        <input name="group_id" class="form-control" id="id" value="{{ individual_group.id }}" required disabled>
+    </div>
+    <div class="mb-3">
+        <label for="reference" class="form-label">reference</label>
+        <input name="group_reference" class="form-control" id="reference" value="{{ individual_group.reference }}" required>
+    </div>
+    <div class="mb-3">
+        <label for="description" class="form-label">description</label>
+        <input name="group_description" class="form-control" id="description" value="{{ individual_group.description }}" required>
+    </div>
+    <div class="mb-3">
+        <label for="date_created" class="form-label">date_created</label>
+        <input name="group_date_created" class="form-control" id="date_created" value="{{ individual_group.date_created }}" required disabled>
+    </div>
+    <div class="mb-3">
+        <input type="submit" value="Update" class="btn btn-primary">
+    </div>
+  </form>
+  </div>
+</div>
+
+<!-- End: Update Individual Item -->
+{% endif %}
+{%- endblock %}

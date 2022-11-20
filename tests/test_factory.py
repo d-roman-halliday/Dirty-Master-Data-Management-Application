@@ -1,6 +1,6 @@
 # Not much change from: https://flask.palletsprojects.com/en/2.1.x/tutorial/tests/
 # ToDo: Extend this
-from dmdma import create_app
+from dmdma.views import create_app
 
 
 def test_config():

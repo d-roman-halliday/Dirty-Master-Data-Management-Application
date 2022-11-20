@@ -1,0 +1,33 @@
+{% extends 'mapping_data_crud/mapping.html' %}
+
+{% block sub_content %}
+<!-- Delete Individual Item -->
+<h2>mapping Information</h2>
+<dl>
+    <dt>ID</dt>
+    <dd><a href='{{ url_for('mapping_data_crud.mapping_retrieve', mapping_id=individual_mapping.id) }}'>{{ individual_mapping.id }}</a></dd>
+    <dt>reference</dt>
+    <dd>{{ individual_mapping.reference }}</dd>
+    <dt>description</dt>
+    <dd>{{ individual_mapping.description }}</dd>
+    <dt>date_created</dt>
+    <dd>{{ individual_mapping.date_created }}</dd>
+</dl>
+
+<h2>Delete mapping</h2>
+<p>Click YES to confirm Deletion</p>
+<form action='' method="post" class='pb-2'>
+    <input type="hidden" name="mapping_delete_verification" id="verification" value="true" >
+    <input type = "submit" value="YES" class="btn btn-warning">
+</form>
+
+<form action="{{ url_for('mapping_data_crud.mapping_retrieve', mapping_id=individual_mapping.id) }}" class='pb-2'>
+<button class="btn btn-primary">Cancel</button>
+</form>
+
+<!-- End: Delete Individual Item -->
+{%- endblock %}
+
+{% block mapping_actions %}
+{# Hide actions on delete page #}
+{%- endblock %}

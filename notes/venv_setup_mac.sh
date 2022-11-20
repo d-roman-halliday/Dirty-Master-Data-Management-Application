@@ -32,3 +32,22 @@ pip install --upgrade pip
 
 # pip install -e .
 pip install -e Dirty-Master-Data-Management-Application
+
+################################################################################
+# Running tests
+################################################################################
+pip install pytest coverage
+
+coverage run -m pytest
+
+# Verbose output, specific file
+coverage run -m pytest -v -s tests/test_mapping_data_crud.py
+# Very Verbose output, specific gile
+coverage run -m pytest -vv -s tests/test_mapping_data_crud.py
+# More output all -
+coverage run -m pytest -rA -s tests/test_mapping_data_crud.py
+
+#View coverage of tests
+coverage report
+# Create detailed report
+coverage html

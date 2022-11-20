@@ -1,0 +1,33 @@
+{% extends 'mapping_data_crud/group.html' %}
+
+{% block sub_content %}
+<!-- Delete Individual Item -->
+<h2>Group Information</h2>
+<dl>
+    <dt>ID</dt>
+    <dd><a href='{{ url_for('mapping_data_crud.group_retrieve', group_id=individual_group.id) }}'>{{ individual_group.id }}</a></dd>
+    <dt>reference</dt>
+    <dd>{{ individual_group.reference }}</dd>
+    <dt>description</dt>
+    <dd>{{ individual_group.description }}</dd>
+    <dt>date_created</dt>
+    <dd>{{ individual_group.date_created }}</dd>
+</dl>
+
+<h2>Delete Group</h2>
+<p>Click YES to confirm Deletion</p>
+<form action='' method="post" class='pb-2'>
+    <input type="hidden" name="group_delete_verification" id="verification" value="true" >
+    <input type = "submit" value="YES" class="btn btn-warning">
+</form>
+
+<form action="{{ url_for('mapping_data_crud.group_retrieve', group_id=individual_group.id) }}" class='pb-2'>
+<button class="btn btn-primary">Cancel</button>
+</form>
+
+<!-- End: Delete Individual Item -->
+{%- endblock %}
+
+{% block group_actions %}
+{# Hide actions on delete page #}
+{%- endblock %}
