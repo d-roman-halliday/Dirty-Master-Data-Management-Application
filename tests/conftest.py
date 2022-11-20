@@ -2,7 +2,8 @@ import os
 import tempfile
 
 import pytest
-from dmdma import create_app
+
+from dmdma.views import create_app
 from dmdma.db import get_db, init_db
 
 with open(os.path.join(os.path.dirname(__file__), 'data.sql'), 'rb') as f:

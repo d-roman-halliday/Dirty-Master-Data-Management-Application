@@ -1,0 +1,30 @@
+{% extends 'master.html' %}
+
+{%- block application_navbar %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <!-- Application Name -->
+    <a class="navbar-brand" href="{{ url_for('iframes.home') }}">iframes</a>
+
+    <!-- Button for if page is too narrow for all items -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarApplication" aria-controls="navbarApplication" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Button controlled items -->
+    <div class="collapse navbar-collapse" id="navbarApplication">
+        <!-- List of Applications -->
+        <ul class="navbar-nav mr-auto">
+        <!-- Sub Item -->
+{#- Using the length of the range to get back an ID for the sub page #}
+{%- for i in range(iframes_collection| length) %}
+            <li class="nav-item"><a class="nav-link" href="{{ url_for('iframes.if_item', iframe_id=i) }}">{{ iframes_collection[i]['name'] }}</a></li>
+{%- endfor %}
+        <!-- End: Sub Item -->
+        </ul>
+    </div>
+</nav>
+{%- endblock %}
+
+{% block content %}
+<p>Mapping Data content goes here</p>
+{% endblock %}

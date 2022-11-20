@@ -117,7 +117,7 @@ def dynamic_sample_1():
             detect_types=sqlite3.PARSE_DECLTYPES
         )
 
-    from dmdma.reporting import item
+    from . import item
 
     get_data_sql = "SELECT * FROM testing;"
 
@@ -167,7 +167,7 @@ def dynamic_sample_2():
             detect_types=sqlite3.PARSE_DECLTYPES
         )
 
-    from dmdma.reporting import item
+    from . import item
 
     get_data_sql = "SELECT value_2, SUM(metric_1) AS metric_1_sum FROM testing GROUP BY value_2;"
 

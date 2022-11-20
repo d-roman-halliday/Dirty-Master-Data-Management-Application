@@ -15,6 +15,7 @@
             <!-- Bootstrap CSS -->
             {{ bootstrap.load_css() }}
             <!-- make me pretty with: https://bootswatch.com/ -->
+            <!-- https://jsfiddle.net/HYf7q/5/ -->
             <!-- https://pythonhosted.org/Flask-Bootstrap/basic-usage.html -->
         {%- endblock %}
         <!-- End: Styles -->
@@ -46,7 +47,9 @@
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item"><a class="nav-link" href="{{ url_for('auth.login') }}">Authentication</a></li>
         {% if g.user %}
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('iframes.home') }}">iframes</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url_for('reporting.home') }}">Reporting</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('mapping_data_crud.home') }}">Mapping Data CRUD</a></li>
         {% endif %}
 	    <!-- Application Selection Items -->
         {%- block application_selection_items -%}

@@ -4,8 +4,6 @@ from flask import Flask
 import dmdma.views
 app = views.create_app()
 
-
-
 if __name__ == '__main__':
     # Run application
     app.run()

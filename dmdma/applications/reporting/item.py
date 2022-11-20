@@ -3,7 +3,7 @@
 '''
 import uuid
 
-from dmdma.reporting import beautify_html_table
+from . import beautify_html_table
 
 class item:
     """A common reporting set of attributes to iterate over for multiple data sets to be returned in a page"""
@@ -42,6 +42,3 @@ class item:
             table_id = self.htmlTableID,
             center_headings = self.htmlTableTitlesCentered
             )
-
-if __name__ == '__main__':
-    pass

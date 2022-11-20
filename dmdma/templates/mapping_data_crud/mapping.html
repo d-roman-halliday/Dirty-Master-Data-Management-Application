@@ -1,0 +1,86 @@
+{% extends 'mapping_data_crud/master.html' %}
+
+{%- block head_custom %}
+<!-- links for CSV Download -->
+<script type="text/javascript" src="{{ url_for('static', filename='csv_table_downloader.js') }}"></script>
+{%- endblock %}
+
+{% block content %}
+<h1>mappings</h1>
+
+{%- if error_message %}
+<!-- Error Message -->
+
+<h2>Error</h2>
+<p>{{ error_message }}</p>
+
+<!-- End: Error Message -->
+{% endif %}
+
+
+{% block sub_content %}
+{%- if mappings %}
+<!-- Output Items -->
+
+<h2>mapping List</h2>
+<table id='mapping_list' class='table table-striped table-hover table-sm'>
+<tr class='thead-dark text-center'>
+    <th>ID</th>
+    <th>Entity ID</th>
+    <th>Group ID</th>
+    <th>Date Created</th>
+<tr>
+{% for mapping in mappings %}
+<tr>
+    <td><a href='{{ url_for('mapping_data_crud.mapping_retrieve', mapping_id=mapping.id) }}'>{{ mapping.id }}</a></td>
+    <td>{{ mapping.entity_id }}</td>
+    <td>{{ mapping.group_id }}</td>
+    <td>{{ mapping.date_created }}</td>
+</tr>
+{% endfor %}
+</table>
+<!-- CSV Download Button -->
+<button class="btn btn-primary" id="mapping_list_btn_download_csv">Download as CSV</button>
+<!-- End: CSV Download Button -->
+<!-- CSV Download Button Code -->
+<script>
+const table_mapping_list = document.getElementById('mapping_list');
+const exportBtn_mapping_list = document.getElementById('mapping_list_btn_download_csv');
+
+exportBtn_mapping_list.addEventListener('click', function () {
+    // Export to csv
+    const csv = toCsv(table_mapping_list);
+
+    // Download it
+    download(csv, 'mappings_list_export.csv');
+});
+</script>
+<!-- End: CSV Download Button Code -->
+
+<!-- End: Output Items -->
+{% endif %}
+{%- endblock %}
+
+{% block mapping_actions %}
+<h2>Actions</h2>
+{%- if individual_mapping %}
+<form action="{{ url_for('mapping_data_crud.mapping_retrieve', mapping_id=individual_mapping.id) }}" class='pb-2'>
+<button class="btn btn-primary">Retrieve (view) This mapping</button>
+</form>
+<form action="{{ url_for('mapping_data_crud.mapping_update', mapping_id=individual_mapping.id) }}" class='pb-2'>
+<button class="btn btn-primary">Update This mapping</button>
+</form>
+<form action="{{ url_for('mapping_data_crud.mapping_delete', mapping_id=individual_mapping.id) }}" class='pb-2'>
+<button class="btn btn-primary">Delete This mapping</button>
+</form>
+<form action="{{ url_for('mapping_data_crud.mapping') }}" class='pb-2'>
+<button class="btn btn-primary">View All mappings</button>
+</form>
+{% else %}
+<form action="{{ url_for('mapping_data_crud.mapping_create') }}" class='pb-2'>
+<button class="btn btn-primary">Create New mapping</button>
+</form>
+{% endif %}
+{%- endblock %}
+
+{%- endblock %}
