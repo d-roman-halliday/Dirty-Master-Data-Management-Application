@@ -42,3 +42,6 @@ class item:
             table_id = self.htmlTableID,
             center_headings = self.htmlTableTitlesCentered
             )
+
+if __name__ == '__main__':
+    pass
