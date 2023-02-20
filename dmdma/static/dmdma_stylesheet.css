@@ -1,0 +1,25 @@
+/* -----------------------------------------------------------------------------
+  Sticky footer styles- Inspired: https://getbootstrap.com/docs/4.0/examples/sticky-footer-navbar/
+----------------------------------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+}
+.footer_row {	
+  /* Margin/Padding not rendering properly (supposed to do +15 then -15)
+     ends up creating horizontal scroll. So set margin 0 then in page
+     for column padding pr-0
+  */
+  margin-right: 0px;
+}

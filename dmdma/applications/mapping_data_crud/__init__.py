@@ -5,6 +5,7 @@ from . import config
 
 from .models import db as crud_db
 from .models import Entity, EntityGroupMapping, Group
+
 from pickle import NONE
 
 
@@ -359,6 +360,9 @@ def reset_db():
 
     # Create and execute query
     show_tables_sql = "SELECT name FROM sqlite_master WHERE type='table';"
+    
+    # TODO: Update code for sqlalchemy 2 or 3:
+    # https://docs.sqlalchemy.org/en/20/changelog/migration_20.html
     results = bound_engine.execute(show_tables_sql)
     
     # Create HTML Table

@@ -17,6 +17,9 @@
             <!-- make me pretty with: https://bootswatch.com/ -->
             <!-- https://jsfiddle.net/HYf7q/5/ -->
             <!-- https://pythonhosted.org/Flask-Bootstrap/basic-usage.html -->
+            
+            <!-- Custom styles for dmdma -->
+            <link href="{{ url_for('static', filename='dmdma_stylesheet.css') }}" rel="stylesheet">
         {%- endblock %}
         <!-- End: Styles -->
 
@@ -75,17 +78,17 @@
             </div>
         </main>
 
-        <footer>
-            <div class="pt-3 bg-dark text-light">
+        <footer class="footer bg-dark">
+            <div class="pt-3 text-light">
 <!-- Page Footer -->
         {%- block page_footer %}
-            <div class="row">
+            <div class="row footer_row">
                 <div class="col ml-3">
             {% if g.user %}
                     <p>Logged in as: {{ g.user['username'] }}</p>
             {% endif %}
                 </div>
-                <div class="col mr-3 text-right">
+                <div class="col mr-3 pr-0 text-right">
                     <p>&copy; David Roman-Halliday</p>
                 </div>
             </div>
